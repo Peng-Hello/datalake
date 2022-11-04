@@ -1,0 +1,1 @@
+<template>yyy</template>
