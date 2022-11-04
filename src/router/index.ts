@@ -9,6 +9,11 @@ const routes = [
         meta: {
             position: "首页",
         },
+        redirect: () => {
+            return {
+                name: "Query",
+            };
+        },
         children: [
             // 查询页
             {

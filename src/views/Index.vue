@@ -18,7 +18,9 @@ import { menuOptions } from "../share/config/menu.config";
         <n-layout>
             <n-scrollbar style="max-height: 100vh">
                 <n-layout-header bordered>颐和园路</n-layout-header>
-                <n-layout-content> 平山道 </n-layout-content>
+                <n-layout-content>
+                    <router-view></router-view>
+                </n-layout-content>
             </n-scrollbar>
         </n-layout>
     </n-layout>
