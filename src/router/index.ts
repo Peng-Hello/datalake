@@ -9,24 +9,26 @@ const routes = [
         meta: {
             position: "首页",
         },
-    },
-    // 查询页
-    {
-        path: "/query",
-        component: () => import("../views/Query.vue"),
-        name:"Query",
-        meta: {
-            position: "查询"
-        }
-    },
-    // 查询页通过SQL查
-    {
-        path: "/querybysql",
-        component: () => import("../views/QueryBySql.vue"),
-        name:"QueryBySql",
-        meta: {
-            position: "SQL查询"
-        }
+        children: [
+            // 查询页
+            {
+                path: "/query",
+                component: () => import("../views/Query.vue"),
+                name: "Query",
+                meta: {
+                    position: "查询",
+                },
+            },
+            // 查询页通过SQL查
+            {
+                path: "/querybysql",
+                component: () => import("../views/QueryBySql.vue"),
+                name: "QueryBySql",
+                meta: {
+                    position: "SQL查询",
+                },
+            },
+        ],
     },
     // 404 页
     {
