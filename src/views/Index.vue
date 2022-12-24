@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { menuOptions } from "../share/config/menu.config";
+import { menuOptions } from "../share/config/menu.config"; // 导航菜单配置
+import Header from "../share/component/Header.vue"; // 头部
 </script>
 
 <template>
@@ -17,7 +18,7 @@ import { menuOptions } from "../share/config/menu.config";
         </n-layout-sider>
         <n-layout>
             <n-scrollbar style="max-height: 100vh">
-                <n-layout-header bordered>颐和园路</n-layout-header>
+                <n-layout-header bordered><Header></Header></n-layout-header>
                 <n-layout-content>
                     <router-view></router-view>
                 </n-layout-content>
@@ -31,6 +32,9 @@ import { menuOptions } from "../share/config/menu.config";
     height: 100vh;
     .n-layout-header {
         height: 47px;
+    }
+    .n-layout-content {
+        padding: 15px 25px;
     }
 }
 </style>

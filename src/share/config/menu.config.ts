@@ -26,7 +26,7 @@ export const menuOptions: Array<
                     },
                 },
                 {
-                    default: () => "查询",
+                    default: () => "Query",
                 }
             ),
         key: "query",
@@ -42,7 +42,7 @@ export const menuOptions: Array<
                     },
                 },
                 {
-                    default: () => "SQL查询",
+                    default: () => "QueryBySql",
                 }
             ),
         key: "query_by_sql",
