@@ -1,53 +1,88 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import SelectFileTable from "../component/SelectFileTable.vue";
+
 import DataTable from "../component/DataTable.vue";
-import DetailedInfo from "../component/DetailedInfo.vue";
-import { selectDbOptions } from "../hooks/getSelectDbItem.hook";
-import { selectFileTpyeOptions } from "../hooks/getFileTypeItem.hook";
-import { selectFileOptions } from "../hooks/getFileItem.hook";
 import { Search } from "@vicons/ionicons5";
-const selectedDbValue = ref("db1");
-const selectedFileTypeValue = ref("mp4");
-const selectedFileValue = ref("csv");
+
+const form = ref({
+    id: "",
+    text: "",
+    timestamp: [1183135260000, Date.now()],
+    source: "",
+    symbols: "",
+    company_name: "",
+});
 </script>
 <template>
-    <n-space align="center">
-        <n-text>Select the database where the file is located:</n-text>
-        <n-select
-            v-model:value="selectedDbValue"
-            :options="selectDbOptions"
-            class="w-40 mr-10"
-        />
-        <n-text> Select the corresponding file type: </n-text>
-        <n-select
-            v-model:value="selectedFileTypeValue"
-            :options="selectFileTpyeOptions"
-            class="w-40 mr-10"
-        />
+    <n-grid :x-gap="32" :y-gap="8" :cols="3">
+        <n-gi>
+            <n-text>id:</n-text>
+            <n-input
+                v-model:value="form.id"
+                type="text"
+                placeholder="Please enter the ID"
+                clearable
+            />
+        </n-gi>
+        <n-gi>
+            <n-text>text:</n-text>
+            <n-input
+                v-model:value="form.text"
+                type="text"
+                placeholder="Please enter the text keyword"
+                clearable
+            />
+        </n-gi>
+        <n-gi>
+            <n-text>timestamp:</n-text>
+            <n-date-picker
+                v-model:value="form.timestamp"
+                type="datetimerange"
+                clearable
+            />
+        </n-gi>
+        <n-gi>
+            <n-text>source:</n-text>
+            <n-input
+                v-model:value="form.source"
+                type="text"
+                placeholder="Please enter the source"
+                clearable
+            />
+        </n-gi>
+        <n-gi>
+            <n-text>symbols:</n-text>
+            <n-input
+                v-model:value="form.symbols"
+                type="text"
+                placeholder="Please enter the symbols"
+                clearable
+            />
+        </n-gi>
+        <n-gi>
+            <n-text>company_name:</n-text>
+            <n-input
+                v-model:value="form.company_name"
+                type="text"
+                placeholder="Please enter the company_name:"
+                clearable
+            />
+        </n-gi>
+    </n-grid>
+    <div class="mt-5 flex items-center">
+        <div class="text-md">Result:</div>
+        <div class="flex-grow text-right">
+            <n-button type="info">
+                <template #icon>
+                    <n-icon>
+                        <Search></Search>
+                    </n-icon>
+                </template>
+                Search
+            </n-button>
+        </div>
+    </div>
 
-        <n-button type="info" class="w-24"
-            ><template #icon>
-                <Search></Search>
-            </template>
-            Search
-        </n-button>
-    </n-space>
-    <n-space align="center" class="mt-5">
-        <n-text>Select corresponding file:</n-text>
-        <n-select
-            v-model:value="selectedFileValue"
-            :options="selectFileOptions"
-            class="w-56"
-        />
-    </n-space>
-    <n-tabs type="line" animated class="mt-9">
-        <n-tab-pane name="overall" tab="Overall information">
-            <DataTable :max-height="350"></DataTable>
-        </n-tab-pane>
-        <n-tab-pane name="detailed" tab="Detailed informatio">
-            <DetailedInfo></DetailedInfo>
-        </n-tab-pane>
-    </n-tabs>
+    <DataTable :max-height="350" class="mt-6"></DataTable>
 </template>
 <style lang="scss" scoped></style>
