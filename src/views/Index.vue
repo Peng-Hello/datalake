@@ -4,7 +4,11 @@ import Header from "../share/component/Header.vue"; // 头部
 </script>
 
 <template>
-    <n-layout has-sider class="container">
+    <n-layout
+        has-sider
+        class="_container"
+        :content-style="{ 'overflow-x': 'visible' }"
+    >
         <n-layout-sider
             bordered
             collapse-mode="width"
@@ -28,12 +32,14 @@ import Header from "../share/component/Header.vue"; // 头部
 </template>
 
 <style lang="scss" scoped>
-.container {
+._container {
     height: 100vh;
+
     .n-layout-header {
         height: 47px;
     }
     .n-layout-content {
+        width: calc(100vw - 240px);
         padding: 15px 25px;
     }
 }

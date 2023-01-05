@@ -7,4 +7,8 @@
     <router-view></router-view>
 </template>
 
-<style scoped></style>
+<style scoped>
+.n-layout {
+    overflow: visible;
+}
+</style>
