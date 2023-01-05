@@ -1,14 +1,14 @@
 export const selectFileTpyeOptions = [
     {
-        label: "txt",
-        value: "txt",
+        label: "json",
+        value: ".json",
     },
     {
-        label: "mp4",
-        value: "mp4",
+        label: "img",
+        value: ".img",
     },
     {
         label: "csv",
-        value: "csv",
+        value: ".csv",
     },
 ];
