@@ -1,5 +1,9 @@
-import { Sql } from "@vicons/carbon";
-import { ConsoleSqlOutlined } from "@vicons/antd";
+import {
+    ConsoleSqlOutlined,
+    DatabaseOutlined,
+    FileSearchOutlined,
+} from "@vicons/antd";
+
 import {
     MenuDividerOption,
     MenuGroupOption,
@@ -30,7 +34,7 @@ export const menuOptions: Array<
                 }
             ),
         key: "query",
-        icon: renderIcon(Sql),
+        icon: renderIcon(FileSearchOutlined),
     },
     {
         label: () =>
@@ -42,10 +46,26 @@ export const menuOptions: Array<
                     },
                 },
                 {
-                    default: () => "QueryBySql",
+                    default: () => "Query by SQL",
                 }
             ),
         key: "query_by_sql",
         icon: renderIcon(ConsoleSqlOutlined),
+    },
+    {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: "SupplyData",
+                    },
+                },
+                {
+                    default: () => "Supply data",
+                }
+            ),
+        key: "supply_data",
+        icon: renderIcon(DatabaseOutlined),
     },
 ];

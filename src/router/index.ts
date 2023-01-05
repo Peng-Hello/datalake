@@ -26,11 +26,20 @@ const routes = [
             },
             // 查询页通过SQL查
             {
-                path: "/querybysql",
+                path: "/query_by_sql",
                 component: () => import("../views/QueryBySql.vue"),
                 name: "QueryBySql",
                 meta: {
                     position: "SQL查询",
+                },
+            },
+            // 数据供应
+            {
+                path: "/supply_data",
+                component: () => import("../views/SupplyData.vue"),
+                name: "SupplyData",
+                meta: {
+                    position: "数据供应",
                 },
             },
         ],
