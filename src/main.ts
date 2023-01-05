@@ -4,4 +4,7 @@ import App from "./App.vue";
 import { createPinia } from "pinia";
 import { router } from "./router/index";
 const pinia = createPinia();
+const meta = document.createElement("meta");
+meta.name = "naive-ui-style";
+document.head.appendChild(meta);
 createApp(App).use(router).use(pinia).mount("#app");
