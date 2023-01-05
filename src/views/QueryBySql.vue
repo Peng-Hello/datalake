@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import DataTable from "../component/DataTable.vue";
 import { PlayCircleOutline, EyeOutline } from "@vicons/ionicons5";
 import { Eraser24Regular } from "@vicons/fluent";
 const sql = ref("");
@@ -19,9 +20,6 @@ const sql = ref("");
             </template>
             Run
         </n-button>
-        <n-button type="info">
-            <template #icon> <EyeOutline></EyeOutline> </template>Preview
-        </n-button>
         <n-button
             type="warning"
             @click="
@@ -34,5 +32,6 @@ const sql = ref("");
             Discard
         </n-button>
     </n-space>
+    <DataTable :max-height="350" class="mt-6"></DataTable>
 </template>
 <style lang="scss" scoped></style>
