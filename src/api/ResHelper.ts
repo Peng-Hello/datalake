@@ -6,5 +6,6 @@ export default (res: AxiosResponse) => {
         return res.data;
     }
     // 按照你自己后端的字段来
-    return res.data;
+
+    return res.data.result;
 };

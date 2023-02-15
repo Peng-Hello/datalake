@@ -1,17 +1,38 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, Ref } from "vue";
 import { ArchiveOutline as ArchiveIcon, CloudUpload } from "@vicons/ionicons5";
 import type { UploadInst, UploadFileInfo } from "naive-ui";
+import type { PostQueryForm } from "../type/postQueryForm.type";
 import { selectFileTpyeOptions } from "../hooks/getFileTypeItem.hook";
 import DataTable from "../component/DataTable.vue";
+import { postDataApi } from "../api/SupplyData/index";
+import { getTableDataByConditionApi } from "../api/Query/index.api";
 const fileType = ref(".csv");
 const fileListLength = ref(0);
 const uploadRef = ref<UploadInst | null>(null);
+let uploadFileInfo: UploadFileInfo;
+const form: Ref<PostQueryForm> = ref({
+    id: "",
+    text: "",
+    timestamp: null,
+    source: "",
+    symbols: "",
+    company_name: "",
+    table: null,
+});
+const dataTableRef = ref();
 function handleChange(options: { fileList: UploadFileInfo[] }) {
     fileListLength.value = options.fileList.length;
+    if (fileListLength.value !== 0) {
+        uploadFileInfo = options.fileList[0];
+    }
 }
 function handleClick() {
-    uploadRef.value?.submit();
+    const { file } = uploadFileInfo;
+    postDataApi(file!).then((res) => {
+        form.value.table = res;
+        dataTableRef.value.updateData();
+    });
 }
 </script>
 <template>
@@ -64,6 +85,11 @@ function handleClick() {
             </n-p>
         </n-upload-dragger>
     </n-upload>
-    <DataTable :max-height="350" class="mt-6"></DataTable>
+    <DataTable
+        ref="dataTableRef"
+        :max-height="350"
+        :update-fun="() => getTableDataByConditionApi(form)"
+        class="mt-6"
+    ></DataTable>
 </template>
 <style lang="scss" scoped></style>

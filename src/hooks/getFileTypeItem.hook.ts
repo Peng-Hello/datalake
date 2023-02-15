@@ -4,8 +4,12 @@ export const selectFileTpyeOptions = [
         value: ".json",
     },
     {
-        label: "img",
-        value: ".img",
+        label: "png",
+        value: ".png",
+    },
+    {
+        label: "jpg",
+        value: ".jpg",
     },
     {
         label: "csv",
