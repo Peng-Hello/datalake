@@ -8,11 +8,19 @@ import { UploadModeOptions } from "../hooks/getUploadModeOptions.hook";
 import DataTable from "../component/DataTable.vue";
 import { postDataApi } from "../api/SupplyData/index";
 import { getTableDataByConditionApi } from "../api/Query/index.api";
+import {
+    selectTableOptions,
+    initTableSelectItem,
+} from "../hooks/getSelectTableItem.hook";
 const fileType = ref(".csv");
 const uploadMode = ref("append");
+const table = ref(null);
 const fileListLength = ref(0);
 const uploadRef = ref<UploadInst | null>(null);
 let uploadFileInfo: UploadFileInfo;
+if (selectTableOptions.value.length == 0) {
+    initTableSelectItem();
+}
 const form: Ref<PostQueryForm> = ref({
     id: "",
     text: "",
@@ -31,7 +39,7 @@ function handleChange(options: { fileList: UploadFileInfo[] }) {
 }
 function handleClick() {
     const { file } = uploadFileInfo;
-    postDataApi(file!, uploadMode.value).then((res) => {
+    postDataApi(file!, uploadMode.value, table.value).then((res) => {
         form.value.table = res;
         dataTableRef.value.updateData();
     });
@@ -49,8 +57,15 @@ function handleClick() {
         <n-select
             v-model:value="uploadMode"
             :options="UploadModeOptions"
-            class="mr-10"
             style="width: 140px"
+        />
+        <n-text> Select table: </n-text>
+        <n-select
+            placeholder="Please select table"
+            v-model:value="table"
+            :options="selectTableOptions"
+            clearable
+            style="width: 200px"
         />
     </n-space>
     <n-space align="center" class="mb-5">
