@@ -4,10 +4,12 @@ import { ArchiveOutline as ArchiveIcon, CloudUpload } from "@vicons/ionicons5";
 import type { UploadInst, UploadFileInfo } from "naive-ui";
 import type { PostQueryForm } from "../type/postQueryForm.type";
 import { selectFileTpyeOptions } from "../hooks/getFileTypeItem.hook";
+import { UploadModeOptions } from "../hooks/getUploadModeOptions.hook";
 import DataTable from "../component/DataTable.vue";
 import { postDataApi } from "../api/SupplyData/index";
 import { getTableDataByConditionApi } from "../api/Query/index.api";
 const fileType = ref(".csv");
+const uploadMode = ref("append");
 const fileListLength = ref(0);
 const uploadRef = ref<UploadInst | null>(null);
 let uploadFileInfo: UploadFileInfo;
@@ -29,7 +31,7 @@ function handleChange(options: { fileList: UploadFileInfo[] }) {
 }
 function handleClick() {
     const { file } = uploadFileInfo;
-    postDataApi(file!).then((res) => {
+    postDataApi(file!, uploadMode.value).then((res) => {
         form.value.table = res;
         dataTableRef.value.updateData();
     });
@@ -42,6 +44,13 @@ function handleClick() {
             v-model:value="fileType"
             :options="selectFileTpyeOptions"
             class="w-40 mr-10"
+        />
+        <n-text> Select upload mode: </n-text>
+        <n-select
+            v-model:value="uploadMode"
+            :options="UploadModeOptions"
+            class="mr-10"
+            style="width: 140px"
         />
     </n-space>
     <n-space align="center" class="mb-5">

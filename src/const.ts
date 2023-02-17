@@ -20,4 +20,4 @@ export const NOT_FOUND_COUNT_DOWN_TIME: number = 3;
 
 // 分页
 // 每页大小
-export const PageSizes = 1;
+export const PageSizes = 25;
