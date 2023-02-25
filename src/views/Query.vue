@@ -14,7 +14,9 @@ import {
     getTableDataByConditionApi,
     downloadTableDataByConditionApi,
 } from "../api/Query/index.api";
-initTableSelectItem();
+if (selectTableOptions.value.length === 0) {
+    initTableSelectItem();
+}
 const message = useMessage();
 const form: Ref<PostQueryForm> = ref({
     id: "",

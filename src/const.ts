@@ -6,11 +6,11 @@ export const resHelperWhitelist: [String] = ["/data/download"];
 switch (import.meta.env.MODE) {
     // 开发环境
     case "development":
-        BASE_URL = "http://c9gcia.natappfree.cc/";
+        BASE_URL = "http://euq92n.natappfree.cc/";
         break;
     // 生产环境
     case "production":
-        BASE_URL = "http://9t4jz4.natappfree.cc:8400/";
+        BASE_URL = "http://114.132.185.184:8400/";
         break;
 }
 

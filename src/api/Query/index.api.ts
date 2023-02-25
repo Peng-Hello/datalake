@@ -25,7 +25,9 @@ export function getTableDataByConditionApi(form: PostQueryForm) {
             symbols,
             text,
         },
-    }).then(ResHelper);
+    }).then((res) => {
+        return res.data;
+    });
 }
 
 export function downloadTableDataByConditionApi(form: PostQueryForm) {

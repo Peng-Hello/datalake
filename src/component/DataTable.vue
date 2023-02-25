@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { defineProps, ref, defineExpose } from "vue";
-import type { Ref } from "vue";
-import type { DataTableColumns } from "naive-ui";
+import { Ref } from "vue";
+import { DataTableColumns } from "naive-ui";
 import type { PostQueryForm } from "../type/postQueryForm.type";
 import {
     currentPage,
@@ -11,7 +11,7 @@ import {
 } from "../hooks/pagination.hook";
 import { PageSizes } from "../const";
 import { parseJSON } from "date-fns";
-
+import { useMessage } from "naive-ui";
 const props = defineProps<{
     maxHeight: number;
     updateFun: () => Promise<any>;
@@ -21,6 +21,7 @@ type TableItem = {
     key: string;
     align: string;
 };
+const message = useMessage();
 const tableHeader: Ref<DataTableColumns<TableItem>> = ref([]);
 const createColumns = (): DataTableColumns<TableItem> => {
     return tableHeader.value;
@@ -34,10 +35,16 @@ function updateData() {
     setAssociatedData(data);
     currentPage.value = 1; // 初始化页号
     dataPromise.then((res) => {
-        maxPage.value = res[0].total;
-        const toObject = JSON.parse('{"data":' + res[0].resultTable + "}");
+        if (res.message === "操作成功！") {
+            message.success(res.message);
+        } else {
+            message.error(res.message);
+        }
+        const resArray = res.result;
+        maxPage.value = resArray[0].total;
+        const toObject = JSON.parse('{"data":' + resArray[0].resultTable + "}");
         const firstItem = toObject.data[0];
-        const tableHeaderArray = <TableItem[]>tableHeader.value;
+        const tableHeaderArray = tableHeader.value;
         tableHeaderArray.length = 0;
         for (let field in firstItem) {
             const tempHeaderItemConfig: TableItem = {
@@ -45,10 +52,20 @@ function updateData() {
                 key: field,
                 align: "center",
             };
-            tableHeaderArray.push(tempHeaderItemConfig);
+            tableHeaderArray.push(tempHeaderItemConfig as any);
         }
-
+        //console.log(toObject.data);
+        transformDatas(toObject.data);
         data.value = toObject.data;
+    });
+}
+function transformDatas(array: any[]) {
+    array.forEach((item) => {
+        for (let key in item) {
+            if (item[key] instanceof Object) {
+                item[key] = JSON.stringify(item[key]);
+            }
+        }
     });
 }
 defineExpose({

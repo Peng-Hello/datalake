@@ -12,7 +12,9 @@ export function getTableDataBySQL(sql: string) {
             pageSize: PageSizes,
             "sqls.sqlQueries": sql,
         },
-    }).then(ResHelper);
+    }).then((res) => {
+        return res.data;
+    });
 }
 export function downloadTableDataBySqlApi(sql: string) {
     return BaseAxios({
